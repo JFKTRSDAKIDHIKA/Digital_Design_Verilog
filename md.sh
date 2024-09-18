@@ -12,7 +12,7 @@ VERILOG_SRCS=$1
 
 # 创建目录
 mkdir -p "$VERILOG_SRCS"
-touch ./$VERILOG_SRCS/"$VERILOG_SRCS".v
+touch "./$VERILOG_SRCS/$VERILOG_SRCS.v"
 touch ./$VERILOG_SRCS/sim_main.cpp
 
 
