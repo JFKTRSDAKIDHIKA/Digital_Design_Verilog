@@ -77,35 +77,31 @@ int main(int argc, char** argv) {
     printf("Adder tests passed!\n");
     
     printf("减数是最小负数时 tests begin!\n");
-    top->A = 0;
-    top->B = -2147483648;
-    top->Cin = 1;
-    top->eval();
-
-    assert((top->overflow & 0b1) == 1 && "Overflow mismatch!");
-    
+    // when a positive number minus -2147483648, must overflow.
+    for(int i = 0; i <= 10; i++){
+    	top->A = 10000 * i;
+    	top->B = -2147483648;
+    	top->Cin = 1;
+    	top->eval();
+    	assert((top->overflow & 0b1) == 1 && "Overflow mismatch!"); 
     // int expected_sum = (0 - (-2147483648)) & 0xFFFFFFFF;   
     // 没有溢出的原因是因为位掩码 & 0xFFFFFFFF 操作将溢出的值限制在 32 位范围内。
-    // when A-B, we come out 2147483648, namely 2^31, which is overflowing!\n。
+    // when A-B, we come out 2147483648, namely 2^31, which is overflowing!\n。 
+    	std::cout << "Sum=" << (int)(top->S) << std::endl; 
+    }
     
-    std::cout << "Sum=" << (int)(top->S) << std::endl; 
+    // when a negative number minus -2147483648, must be correct.
+    for(int i = 0; i <= 10; i++){
+    	top->A = -2147483648 + 10000 * i;
+    	top->B = -2147483648;
+    	top->Cin = 1;
+    	top->eval();
+	int expected_sum = ((-2147483648 + 10000 * i) - (-2147483648)) & 0xFFFFFFFF;
+    	assert((top->overflow & 0b1) == 0 && "Overflow mismatch!");
+ 	assert(((top->S & 0xFFFFFFFF) == expected_sum) && "Sum mismatch");
+    	std::cout << "Sum=" << (int)(top->S) << std::endl; 
 
-    top->A = -100;
-    top->B = -2147483648;
-    top->Cin = 1;
-    top->eval();
-    assert((top->overflow & 0b1) == 0 && "Overflow mismatch!");
-    std::cout << "Sum=" << (int)(top->S) << std::endl; 
-
-
-    top->A = -2147483648;
-    top->B = -2147483648;
-    top->Cin = 1;
-    top->eval();
-    assert((top->overflow & 0b1) == 0 && "Overflow mismatch!");
-    std::cout << "Sum=" << (int)(top->S) << std::endl; 
-    // 当被减数是最小负数的时候，最小负数的2's complement是它自己。比如，-2^31的补数就是2^31, 所以-2147483648 - （-2147483648）在硬件上实际执行的是
-    // -2147483648 + (-2147483648) 的二进制加法，删掉carry，就是0，很神奇。 
+    }
     printf("减数是最小负数时 tests passed!\n");
 
 
