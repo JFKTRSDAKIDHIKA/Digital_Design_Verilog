@@ -1,13 +1,14 @@
 module mux8to1 (
-    input wire [2:0] sel,  // 3 位的选择信号
-    input wire [31:0] a,          // 输入信号 a
-    input wire [31:0] b,          // 输入信号 b
-    input wire [31:0] c,          // 输入信号 c
-    input wire [31:0] d,          // 输入信号 d
-    input wire [31:0] e,          // 输入信号 a
-    input wire [31:0] f,          // 输入信号 b
-    input wire [31:0] g,          // 输入信号 c
-    input wire [31:0] h,          // 输入信号 d
+     // Input signal 默认是wire类型的
+    input [2:0] sel,  // 3 位的选择信号
+    input [31:0] a,          // 输入信号 a
+    input [31:0] b,          // 输入信号 b
+    input [31:0] c,          // 输入信号 c
+    input [31:0] d,          // 输入信号 d
+    input [31:0] e,          // 输入信号 a
+    input [31:0] f,          // 输入信号 b
+    input [31:0] g,          // 输入信号 c
+    input [31:0] h,          // 输入信号 d
     output reg [31:0] y          // 输出信号 y
 );
     always @(*) begin

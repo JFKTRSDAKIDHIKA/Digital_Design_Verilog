@@ -1,4 +1,7 @@
-sim_main.o: /root/Digital_Design_Verilog/mux41/csrc/sim_main.cpp Vmux41.h \
+auto_bind.o: \
+ /root/Digital_Design_Verilog/4to1mux2bits/build/auto_bind.cpp \
+ /root/ysyx-workbench/nvboard/usr/include/nvboard.h \
+ /root/ysyx-workbench/nvboard/usr/include/pins.h Vtop.h \
  /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilatedos.h \
  /usr/local/share/verilator/include/verilated_config.h \
